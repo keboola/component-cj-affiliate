@@ -14,8 +14,8 @@
         "#apiToken": {
             "type": "string",
             "format": "password",
-            "title": "Personal access token",
-            "description": "The personal access token granting the authorization to the API. A token can be created in <a href='https://developers.cj.com/account/personal-access-tokens'>CJ Developer Portal</a>.",
+            "title": "Personal Access Token",
+            "description": "The personal access token authorizing requests to the API. A token can be created in <a href='https://developers.cj.com/account/personal-access-tokens'>CJ Developer Portal</a>.",
             "propertyOrder": 100
         },
         "advOrPub": {
@@ -27,14 +27,14 @@
             ],
             "default": "advertiser",
             "propertyOrder": 200,
-            "title": "Advertiser or publisher",
-            "description": "Choose whether to use \"advertiserCommission\" endpoint or \"publisherCommissions\" endpoint."
+            "title": "Advertiser or Publisher",
+            "description": "Choose whether to use \"advertiserCommissions\" endpoint or \"publisherCommissions\" endpoint."
         },
         "entityId": {
             "type": "array",
             "format": "table",
             "title": "Entity IDs",
-            "description": "IDs of entities, for which to download commission",
+            "description": "IDs of entities, for which to download commissions. Un-authorized entities are ignored.",
             "items": {
                 "title": "ID",
                 "type": "string"
@@ -47,29 +47,29 @@
             "options": {
                 "input_height": "100px"
               },
-            "default": "advertiserId,publisherId,eventDate,actionStatus,actionType,commissionId,eventDate,lockingDate,postingDate,verticalAttributes{age,bookingDate,campaignId,city,countryCode,itemId},items{commissionItemId,sku,totalCommissionUsd}",
+            "default": "commissionId advertiserId advCommissionAmountAdvCurrency items { sku } verticalAttributes {age}",
             "propertyOrder": 700,
             "title": "Query",
             "description": "A valid records query that will be sent to CJ's API. Refer to <a href='https://developers.cj.com/graphql/reference/Commission%20Detail'>CJ's Developer portal</a> for valid query fields and correct specification."
         },
         "dateFrom": {
             "type": "string",
-            "title": "Start date",
-            "description": "Lower boundary of the date window, for which the commissions should be downloaded.</br>Accepted values:<ul><li>\"yesterday\" - sets parameter to yesterday's date,</li><li>\"X day(s) ago\" - sets parameter to relative date from today,</li><li>absolute date in format YYYY-MM-DD.",
+            "title": "Start Date",
+            "description": "Lower boundary of the date window, for which the commissions should be downloaded.</br></br>Accepted values:<ul><li><font color='red'>yesterday</font> - sets parameter to yesterday's date,</li><li><font color='red'>X day(s) ago</font> - sets parameter to relative date from today,</li><li>absolute date in format <font color='red'>YYYY-MM-DD</font>.",
             "propertyOrder": 400,
             "default": "7 days ago"
         },
         "dateTo": {
             "type": "string",
-            "title": "End date",
-            "description": "Upper boundary of the date window, for which the commissions should be downloaded.</br>Accepted values:<ul><li>\"now\", \"today\" or blank - sets parameter to today's date,</li><li>\"yesterday\" - sets parameter to yesterday's date,</li><li>\"X day(s) ago\" - sets parameter to relative date from today,</li><li>absolute date in format YYYY-MM-DD.",
+            "title": "End Date",
+            "description": "Upper boundary of the date window, for which the commissions should be downloaded.</br></br>Accepted values:<ul><li><font color='red'>now</font>, <font color='red'>today</font> or blank - sets parameter to today's date,</li><li><font color='red'>yesterday</font> - sets parameter to yesterday's date,</li><li><font color='red'>X day(s) ago</font> - sets parameter to relative date from today,</li><li>absolute date in format <font color='red'>YYYY-MM-DD</font>.",
             "propertyOrder": 500,
             "default": "now"
         },
         "incremental": {
             "type": "boolean",
-            "title": "Incremental load",
-            "description": "If set to \"true\", incremental load will be utilized. Otherwise, full load to storage is performed.",
+            "title": "Incremental Load",
+            "description": "If set to <font color='red'>true</font>, incremental load will be utilized. Otherwise, full load to storage is performed.",
             "default": true,
             "propertyOrder": 600
         }

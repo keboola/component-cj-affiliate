@@ -1,3 +1,8 @@
+**0.1.0**
+Production ready version of the extractor
+Added documentation and description
+Specified UI schema
+
 **0.0.2**
 Fixed error with data path.
 

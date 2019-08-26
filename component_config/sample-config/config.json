@@ -1,4 +1,12 @@
 {
-  "parameters": {},
-  "image_parameters": {}
+  "parameters":{
+    "#apiToken": "XXXXXXXXXXXXX",
+    "advOrPub": "advertiser",
+    "entityId": ["1234568","23456789","34567890"],
+    "recordsQuery": ",advertiserId publisherId eventDate actionStatus actionType commissionId eventDate lockingDate postingDate items {commissionItemId , sku, totalCommissionUsd} ,,,,verticalAttributes{age bookingDate,campaignId city,countryCode,itemId}",
+    "dateFrom": "2019-01-01",
+    "dateTo": "now",
+    "incremental": true
+  },
+  "image_parameters":{}
 }
