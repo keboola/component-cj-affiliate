@@ -57,7 +57,7 @@ class cjRunner(KBCEnvHandler):
             }
 
         self.client = cjClient(self.paramApiToken)
-        self.writer = cjWriter(dataPath='./data', tableDict=_tableDict, incremental=self.paramIncremental)
+        self.writer = cjWriter(dataPath=self.data_path, tableDict=_tableDict, incremental=self.paramIncremental)
 
     def _sanitizeQuery(self, queryString):
 
