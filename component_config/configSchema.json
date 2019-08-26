@@ -1,1 +1,75 @@
-{}
+{
+    "title": "Parameters",
+    "type": "object",
+    "required": [
+        "#apiToken",
+        "advOrPub",
+        "entityId",
+        "recordsQuery",
+        "dateFrom",
+        "dateTo",
+        "incremental"
+    ],
+    "properties": {
+        "#apiToken": {
+            "type": "string",
+            "format": "password",
+            "title": "Personal access token",
+            "description": "The personal access token granting the authorization to the API. A token can be created in <a href='https://developers.cj.com/account/personal-access-tokens'>CJ Developer Portal</a>.",
+            "propertyOrder": 100
+        },
+        "advOrPub": {
+            "type": "string",
+            "uniqueItems": true,
+            "enum": [
+                "advertiser",
+                "publisher"
+            ],
+            "default": "advertiser",
+            "propertyOrder": 200
+        },
+        "entityId": {
+            "type": "array",
+            "format": "table",
+            "title": "Entity IDs",
+            "description": "IDs of entities, for which to download commission",
+            "items": {
+                "title": "ID",
+                "type": "string"
+            },
+            "propertyOrder": 300
+        },
+        "recordsQuery": {
+            "type": "string",
+            "format": "textarea",
+            "options": {
+                "input_height": "100px"
+              },
+            "default": "advertiserId,publisherId,eventDate,actionStatus,actionType,commissionId,eventDate,lockingDate,postingDate,verticalAttributes{age,bookingDate,campaignId,city,countryCode,itemId},items{commissionItemId,sku,totalCommissionUsd}",
+            "propertyOrder": 700,
+            "title": "Query",
+            "description": "A valid records query that will be sent to CJ's API. Refer to <a href='https://developers.cj.com/graphql/reference/Commission%20Detail'>CJ's Developer portal</a> for valid query fields and correct specification."
+        },
+        "dateFrom": {
+            "type": "string",
+            "title": "Start date",
+            "description": "Lower boundary of the date window, for which the commissions should be downloaded.</br>Accepted values:<ul><li>\"yesterday\" - sets parameter to yesterday's date,</li><li>\"X day(s) ago\" - sets parameter to relative date from today,</li><li>absolute date in format YYYY-MM-DD.",
+            "propertyOrder": 400,
+            "default": "7 days ago"
+        },
+        "dateTo": {
+            "type": "string",
+            "title": "End date",
+            "description": "Upper boundary of the date window, for which the commissions should be downloaded.</br>Accepted values:<ul><li>\"now\", \"today\" or blank - sets parameter to today's date,</li><li>\"yesterday\" - sets parameter to yesterday's date,</li><li>\"X day(s) ago\" - sets parameter to relative date from today,</li><li>absolute date in format YYYY-MM-DD.",
+            "propertyOrder": 500,
+            "default": "now"
+        },
+        "incremental": {
+            "type": "boolean",
+            "title": "Incremental load",
+            "description": "If set to \"true\", incremental load will be utilized. Otherwise, full load to storage is performed.",
+            "default": true,
+            "propertyOrder": 600
+        }
+    }
+}
