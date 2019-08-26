@@ -119,13 +119,13 @@ and fills in the last piece of puzzle into the query sent to the API:
 
 Notice the added `commissionItemId` field in the items query. The query inputted must not be encapsulated by curly braces (`{}`) as it's already inputted into `records {}`, which itself is bounded by these. The query will fail otherwise.
 
-Correct:
+**Correct**:
 
 ```
 commissionId advertiserId saleAmountAdvCurrency items { commissionItemId sku} verticalAttributes{age, city, campaignId}
 ```
 
-Incorrect:
+**Incorrect**:
 
 ```
 { commissionId advertiserId saleAmountAdvCurrency items { commissionItemId sku} verticalAttributes{age, city, campaignId} }

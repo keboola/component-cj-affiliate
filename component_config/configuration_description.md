@@ -1,6 +1,4 @@
-The example of component's configuration can be foung in the [repository](https://bitbucket.org/kds_consulting_team/kds-team.ex-cj-affiliate/src/master/component_config/sample-config/).
-
-The API returns commissions that satisfy a query sent to the API. The **full** query sent to the API might have the following form
+The API returns commissions that satisfy a query sent to the API. The **full** query sent to the API might have the following form:
 
 ```
 { publisherCommissions(forPublishers: ["999"], sinceEventDate:"2018-08-08T00:00:00Z",beforeEventDate:"2018-08-09T00:00:00Z"){count payloadComplete records {actionTrackerName websiteName advertiserName postingDate pubCommissionAmountUsd items { quantity perItemSaleAmountPubCurrency totalCommissionPubCurrency }  }  } }
@@ -103,13 +101,13 @@ and fills in the last piece of puzzle into the query sent to the API:
 
 Notice the added `commissionItemId` field in the items query. The query inputted must not be encapsulated by curly braces (`{}`) as it's already inputted into `records {}`, which itself is bounded by these. The query will fail otherwise.
 
-Correct:
+**Correct**:
 
 ```
 commissionId advertiserId saleAmountAdvCurrency items { commissionItemId sku} verticalAttributes{age, city, campaignId}
 ```
 
-Incorrect:
+**Incorrect**:
 
 ```
 { commissionId advertiserId saleAmountAdvCurrency items { commissionItemId sku} verticalAttributes{age, city, campaignId} }
