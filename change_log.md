@@ -1,3 +1,6 @@
+**0.1.1**
+Fixed TypeError: not all arguments converted during string formatting, that appeared on startup of the application and made the application exit
+
 **0.1.0**
 Production ready version of the extractor
 Added documentation and description

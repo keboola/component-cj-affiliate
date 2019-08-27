@@ -37,9 +37,9 @@ class cjRunner(KBCEnvHandler):
         self.varDateTo = self.parseDates(self.paramDateTo, 'to')
         self.varDateFrom = self.parseDates(self.paramDateFrom, 'from')
         self.varDateRange = self.split_dates_to_chunks(self.varDateFrom, self.varDateTo,
-                                                       10, strformat='%Y-%m-%dT%H:%M:%SZ')
+                                                       5, strformat='%Y-%m-%dT%H:%M:%SZ')
 
-        logging.info("Downloading commissions. Start date: , end date: %s." % (self.varDateFrom, self.varDateTo))
+        logging.info("Downloading commissions. Start date: %s, end date: %s." % (self.varDateFrom, self.varDateTo))
 
         self._validateParameters()
         self.prepareColumnsAndQuery()
