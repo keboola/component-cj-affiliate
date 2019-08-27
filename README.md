@@ -30,7 +30,7 @@ In the following section, each parameter will be dissected one-by-one and its ro
 
 ##### Note on date ranges
 
-By design, the CJ's API only accepts date ranges with a maximum of 31 days difference. The extractor automatically splits the date into intervals of maximum 10 days and queries the data for each of the 10-day ranges. A 10 day interval was chosen as an optimal trade-off between number of requests and long query times for longer date ranges.
+By design, the CJ's API only accepts date ranges with a maximum of 31 days difference. The extractor automatically splits the date into intervals of maximum 5 days and queries the data for each of the 5-day ranges. A 5 day interval was chosen as an optimal trade-off between number of requests and long query times for longer date ranges.
 
 ##### Notes on pagination
 

@@ -1,5 +1,6 @@
 **0.1.1**
 Fixed TypeError: not all arguments converted during string formatting, that appeared on startup of the application and made the application exit
+Changed maximum date interval to 5 days, instead of previously used 10.
 
 **0.1.0**
 Production ready version of the extractor
