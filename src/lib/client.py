@@ -16,7 +16,7 @@ class cjClient(HttpClientBase):
         }
 
         HttpClientBase.__init__(self, base_url=BASE_URL, default_http_header=_defaultHeaders,
-                                status_forcelist=(502, 504), max_retries=10)
+                                status_forcelist=(502, 504), max_retries=3)
 
         logging.debug("Client initialized.")
 
