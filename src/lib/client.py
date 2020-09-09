@@ -22,7 +22,7 @@ class cjClient(HttpClientBase):
 
     def _sendQuery(self, query):
 
-        rspQuery = self.post_raw(url=self.base_url, data=str(query), timeout=600)
+        rspQuery = self.post_raw(url=self.base_url, data=str(query), timeout=(60, 600))
         querySc, queryJs = rspQuery.status_code, rspQuery.json()
 
         if querySc == 200:
