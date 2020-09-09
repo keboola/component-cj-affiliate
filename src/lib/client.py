@@ -16,14 +16,13 @@ class cjClient(HttpClientBase):
         }
 
         HttpClientBase.__init__(self, base_url=BASE_URL, default_http_header=_defaultHeaders,
-                                status_forcelist=(502, 504), max_retries=3)
+                                status_forcelist=(502, 504), max_retries=5)
 
         logging.debug("Client initialized.")
 
     def _sendQuery(self, query):
 
-        rspQuery = self.post_raw(url=self.base_url, data=str(query))
-
+        rspQuery = self.post_raw(url=self.base_url, data=str(query), timeout=600)
         querySc, queryJs = rspQuery.status_code, rspQuery.json()
 
         if querySc == 200:
