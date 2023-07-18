@@ -44,7 +44,7 @@ class cjClient(HttpClientBase):
             sys.exit(1)
 
     def _buildQuery(self, advOrPub, entities, startDate,
-                    endDate, recordsQuery, sinceCommissionId=None):
+                    endDate, dateField,  recordsQuery, sinceCommissionId=None):
 
         query = '{'
 
@@ -56,8 +56,8 @@ class cjClient(HttpClientBase):
 
             query += f'publisherCommissions ( forPublishers: {entities}, '
 
-        query += f'sinceEventDate: "{startDate}", '
-        query += f'beforeEventDate: "{endDate}"'
+        query += f'since{dateField}: "{startDate}", '
+        query += f'before{dateField}: "{endDate}"'
 
         if sinceCommissionId is not None:
 
@@ -70,7 +70,7 @@ class cjClient(HttpClientBase):
         return query
 
     def getPagedCommissions(self, advOrPub, entities, startDate,
-                            endDate, recordsQuery):
+                            endDate, dateField, recordsQuery):
 
         dataKey = "advertiserCommissions" if advOrPub == 'advertiser' else "publisherCommissions"
         payloadComplete = False
@@ -80,7 +80,7 @@ class cjClient(HttpClientBase):
         while payloadComplete is False:
 
             query = self._buildQuery(advOrPub, entities, startDate,
-                                     endDate, recordsQuery, sinceCommissionId=sinceCommissionId)
+                                     endDate, dateField, recordsQuery, sinceCommissionId=sinceCommissionId)
 
             logging.info("Sending query: %s." % query)
 

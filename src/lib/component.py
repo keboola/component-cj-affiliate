@@ -14,6 +14,7 @@ QUERY_KEY = 'recordsQuery'
 INCREMENTAL_KEY = 'incremental'
 DATE_FROM_KEY = 'dateFrom'
 DATE_TO_KEY = 'dateTo'
+DATE_FIELD_KEY = 'dateField'
 
 MANDATORY_PARAMS = [API_TOKEN_KEY, ADVERTISER_OR_PUBLISHER_KEY,
                     ENTITY_KEY, QUERY_KEY, DATE_FROM_KEY]
@@ -33,6 +34,7 @@ class cjRunner(KBCEnvHandler):
         self.paramIncremental = self.cfg_params[INCREMENTAL_KEY]
         self.paramDateTo = self.cfg_params[DATE_TO_KEY]
         self.paramDateFrom = self.cfg_params[DATE_FROM_KEY]
+        self.paramDateField = self.cfg_params.get(DATE_FIELD_KEY,'EventDate')
 
         self.varDateTo = self.parseDates(self.paramDateTo, 'to')
         self.varDateFrom = self.parseDates(self.paramDateFrom, 'from')
@@ -283,6 +285,7 @@ class cjRunner(KBCEnvHandler):
             allData = self.client.getPagedCommissions(advOrPub=self.paramAdvOrPub,
                                                       entities=json.dumps(self.paramEntityId),
                                                       startDate=startDate, endDate=endDate,
+                                                      dateField=self.paramDateField,
                                                       recordsQuery=self.varRecordsQuery)
 
             for obj in allData:
