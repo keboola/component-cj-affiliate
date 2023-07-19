@@ -75,7 +75,7 @@
                 "PostingDate"
             ],
             "default": "EventDate",
-            "propertyOrder": 10,
+            "propertyOrder": 550,
             "description": "Select one of the available filtering arguments. Refer to <a href='https://developers.cj.com/graphql/reference/Commission%20Detail'>CJ's Developer portal</a>"
         },
         "incremental": {
