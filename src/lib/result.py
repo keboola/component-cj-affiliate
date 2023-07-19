@@ -22,7 +22,7 @@ class cjWriter:
             self.paramDataPath, 'out', 'tables', _fileName)
 
         _tableDef = KBCTableDef(
-            name=tableName, columns=tableColumns, destination=tableName, pk=tablePK)
+            name=tableName, columns=tableColumns, pk=tablePK)
         _resultDef = KBCResult(file_name=_fileName,
                                full_path=_fullPath, table_def=_tableDef)
 
