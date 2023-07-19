@@ -14,6 +14,7 @@ QUERY_KEY = 'recordsQuery'
 INCREMENTAL_KEY = 'incremental'
 DATE_FROM_KEY = 'dateFrom'
 DATE_TO_KEY = 'dateTo'
+DATE_FIELD_KEY = 'dateField'
 
 MANDATORY_PARAMS = [API_TOKEN_KEY, ADVERTISER_OR_PUBLISHER_KEY,
                     ENTITY_KEY, QUERY_KEY, DATE_FROM_KEY]
@@ -33,13 +34,15 @@ class cjRunner(KBCEnvHandler):
         self.paramIncremental = self.cfg_params[INCREMENTAL_KEY]
         self.paramDateTo = self.cfg_params[DATE_TO_KEY]
         self.paramDateFrom = self.cfg_params[DATE_FROM_KEY]
+        self.paramDateField = self.cfg_params.get(DATE_FIELD_KEY, 'EventDate')
 
         self.varDateTo = self.parseDates(self.paramDateTo, 'to')
         self.varDateFrom = self.parseDates(self.paramDateFrom, 'from')
         self.varDateRange = self.split_dates_to_chunks(self.varDateFrom, self.varDateTo,
                                                        5, strformat='%Y-%m-%dT%H:%M:%SZ')
 
-        logging.info("Downloading commissions. Start date: %s, end date: %s." % (self.varDateFrom, self.varDateTo))
+        logging.info("Downloading commissions. Start date: %s, end date: %s." % (
+            self.varDateFrom, self.varDateTo))
 
         self._validateParameters()
         self.prepareColumnsAndQuery()
@@ -59,12 +62,14 @@ class cjRunner(KBCEnvHandler):
             }
 
         self.client = cjClient(self.paramApiToken)
-        self.writer = cjWriter(dataPath=self.data_path, tableDict=_tableDict, incremental=self.paramIncremental)
+        self.writer = cjWriter(
+            dataPath=self.data_path, tableDict=_tableDict, incremental=self.paramIncremental)
 
     def _sanitizeQuery(self, queryString):
 
         queryString = re.sub(r"items\s*\{", " items{", queryString)
-        queryString = re.sub(r"verticalAttributes\s*\{", " verticalAttributes{", queryString)
+        queryString = re.sub(
+            r"verticalAttributes\s*\{", " verticalAttributes{", queryString)
         queryString = re.sub(r"\{\s+", '{', re.sub(r"\s+\}", '}', queryString))
 
         return re.sub(r'\s+', ',', re.sub(r'[^\d\w\{\}]', ' ', queryString).strip())
@@ -135,7 +140,8 @@ class cjRunner(KBCEnvHandler):
 
         else:
 
-            _vertAttrColumns = ['verticalAttributes_' + v.strip() for v in _vAttr.split(',')]
+            _vertAttrColumns = ['verticalAttributes_' + v.strip()
+                                for v in _vAttr.split(',')]
 
         sanitizedQuery = self._sanitizeQuery(queryNoVertAttr)
 
@@ -202,7 +208,8 @@ class cjRunner(KBCEnvHandler):
 
         if self.varDateTo <= self.varDateFrom:
 
-            logging.error("The upper boundary of date must be greater than the lower boundary!")
+            logging.error(
+                "The upper boundary of date must be greater than the lower boundary!")
             sys.exit(1)
 
         if len(self.paramEntityId) == 0:
@@ -231,7 +238,8 @@ class cjRunner(KBCEnvHandler):
 
             else:
 
-                logging.error("Parameter \"dateFrom\" can't be one of \"now, today\".")
+                logging.error(
+                    "Parameter \"dateFrom\" can't be one of \"now, today\".")
                 sys.exit(1)
 
         elif dateString == 'yesterday':
@@ -251,7 +259,8 @@ class cjRunner(KBCEnvHandler):
                 logging.error("Incorrect specification of date. %s" % e)
                 sys.exit(1)
 
-            parsedDate = datetime.datetime.utcnow().date() - datetime.timedelta(days=_dateRelative)
+            parsedDate = datetime.datetime.utcnow().date(
+            ) - datetime.timedelta(days=_dateRelative)
 
         else:
 
@@ -278,11 +287,14 @@ class cjRunner(KBCEnvHandler):
             startDate = timeRange['start_date']
             endDate = timeRange['end_date']
 
-            logging.info("Starting download for period from %s to %s." % (startDate, endDate))
+            logging.info("Starting download for period from %s to %s." %
+                         (startDate, endDate))
 
             allData = self.client.getPagedCommissions(advOrPub=self.paramAdvOrPub,
-                                                      entities=json.dumps(self.paramEntityId),
+                                                      entities=json.dumps(
+                                                          self.paramEntityId),
                                                       startDate=startDate, endDate=endDate,
+                                                      dateField=self.paramDateField,
                                                       recordsQuery=self.varRecordsQuery)
 
             for obj in allData:

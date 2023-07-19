@@ -46,7 +46,7 @@
             "format": "textarea",
             "options": {
                 "input_height": "100px"
-              },
+            },
             "default": "commissionId advertiserId advCommissionAmountAdvCurrency items { sku } verticalAttributes {age}",
             "propertyOrder": 700,
             "title": "Query",
@@ -65,6 +65,18 @@
             "description": "Upper boundary of the date window, for which the commissions should be downloaded.</br></br>Accepted values:<ul><li><font color='red'>now</font>, <font color='red'>today</font> or blank - sets parameter to today's date,</li><li><font color='red'>yesterday</font> - sets parameter to yesterday's date,</li><li><font color='red'>X day(s) ago</font> - sets parameter to relative date from today,</li><li>absolute date in format <font color='red'>YYYY-MM-DD</font>.",
             "propertyOrder": 500,
             "default": "now"
+        },
+        "dateField": {
+            "title": "Date window field",
+            "type": "string",
+            "enum": [
+                "EventDate",
+                "LockingDate",
+                "PostingDate"
+            ],
+            "default": "EventDate",
+            "propertyOrder": 550,
+            "description": "Select one of the available filtering arguments. Refer to <a href='https://developers.cj.com/graphql/reference/Commission%20Detail'>CJ's Developer portal</a>"
         },
         "incremental": {
             "type": "boolean",
