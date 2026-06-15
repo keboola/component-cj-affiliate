@@ -1,1 +1,1 @@
-CJ Affiliate is an online advertising company operating in the affiliate marketing industry, connecting publishers with advertisers globally.
+Extracts CJ Affiliate commissions for advertisers or publishers.
